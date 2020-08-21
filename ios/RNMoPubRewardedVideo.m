@@ -6,9 +6,12 @@
 //
 
 #import "RNMoPubRewardedVideo.h"
+#import <AdColonyGlobalMediationSettings.h>
+#import <MPGoogleGlobalMediationSettings.h>
+#import <TapjoyGlobalMediationSettings.h>
+#import <VungleInstanceMediationSettings.h>
 #import "MPRewardedVideo.h"
 #import "AdLibSDK.h"
-
 @implementation RNMoPubRewardedVideo
 
 RCT_EXPORT_MODULE();
@@ -42,13 +45,11 @@ RCT_EXPORT_METHOD(initializeSdkForRewardedVideoAd:(NSString *)unitId) {
     [AdLibSDK initializeAdSDK:unitId];
 }
 
-RCT_EXPORT_METHOD(presentRewardedVideoAdForAdUnitID:(NSString *) unitId currencyType:(NSString*)currencyType amount:(nonnull NSNumber*) amount callback:(RCTResponseSenderBlock)callback)
+RCT_EXPORT_METHOD(presentRewardedVideoAdForAdUnitID:(NSString *) unitId callback:(RCTResponseSenderBlock)callback)
 {
     
     if ([MPRewardedVideo hasAdAvailableForAdUnitID:unitId]) {
-        NSPredicate *rewardPredicate = [NSPredicate predicateWithFormat:@"(SELF.currencyType == %@ AND SELF.amount == %@)", currencyType, amount];
-        
-        MPRewardedVideoReward *selectedReward = [[MPRewardedVideo availableRewardsForAdUnitID:unitId] filteredArrayUsingPredicate:rewardPredicate].firstObject;
+        MPRewardedVideoReward *selectedReward = [MPRewardedVideo availableRewardsForAdUnitID:unitId].firstObject;
         
         if (selectedReward) {
              UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
@@ -121,7 +122,7 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 }
 
 - (void)rewardedVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MPRewardedVideoReward *)reward {
-     [self sendEventWithName:@"rewardedVideoAdShouldRewardForAdUnitID" body:nil];
+     [self sendEventWithName:@"rewardedVideoAdShouldRewardForAdUnitID" body:@{@"adUnitID": adUnitID}];
 }
 
 - (void)rewardedVideoAdDidExpireForAdUnitID:(NSString *)adUnitID {
