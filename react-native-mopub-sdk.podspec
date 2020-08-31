@@ -46,7 +46,7 @@ Pod::Spec.new do |s|
         
     end
 
-    s.subspec "Facebook Audience Network" do |ss|
+    s.subspec "FacebookAudienceNetwork" do |ss|
         
         ss.dependency 'MoPub-FacebookAudienceNetwork-Adapters', '~> 5.10.1.1'
         
