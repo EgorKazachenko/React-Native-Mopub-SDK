@@ -10,7 +10,7 @@
 #import "MPMoPubConfiguration.h"
 
 #import "AdColonyGlobalMediationSettings.h"
-#import "GoogleAdMobAdapterConfiguration.h"
+#import "MPGoogleGlobalMediationSettings.h"
 #import "AppLovinAdapterConfiguration.h"
 #import "FacebookAdapterConfiguration.h"
 #import "IronSourceAdapterConfiguration.h"
@@ -19,7 +19,7 @@
 
 + (void)initializeAdSDK:(NSString *)unitID {    
     AdColonyGlobalMediationSettings *adColonyMediationSettings = [[AdColonyGlobalMediationSettings alloc] init];
-    GoogleAdMobAdapterConfiguration *admobGoogleMediationSettings = [[GoogleAdMobAdapterConfiguration alloc] init];
+    MPGoogleGlobalMediationSettings *admobGoogleMediationSettings = [[MPGoogleGlobalMediationSettings alloc] init];
     AppLovinAdapterConfiguration *applovinMediationSettings = [[AppLovinAdapterConfiguration alloc] init];
     FacebookAdapterConfiguration *facebookMediationSettings = [[FacebookAdapterConfiguration alloc] init];
     IronSourceAdapterConfiguration *ironSourceMediationSettings = [[IronSourceAdapterConfiguration alloc] init];
